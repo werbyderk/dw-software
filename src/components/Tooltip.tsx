@@ -2,16 +2,13 @@ const styles = {
     content: {
         padding: '5px',
         border: '3px solid black',
-        borderRadius: '2px'
+        borderRadius: '2px',
     },
-    arrow: {
-        
-    }
+    arrow: {},
 }
-
 
 const Tooltip = () => {
-    return (  );
+    return <></>
 }
- 
-export default Tooltip;
+
+export default Tooltip

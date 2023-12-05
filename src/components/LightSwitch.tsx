@@ -96,7 +96,7 @@ const LightSwitch = () => {
         Runner.run(runner, engine)
     }, [])
 
-    return <div ref={containerRef} className='absolute top-0 left-0 z-10'></div>
+    return <div ref={containerRef as any} className='absolute top-0 left-0 z-10'></div>
 }
 
 export default LightSwitch
