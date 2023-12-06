@@ -105,11 +105,11 @@ export default function Home() {
             <div className='w-full'>
                 <div className='w-[50%] flex justify-between m-auto'>
                     <FeatureButton
-                        target='https://calendly.com/dw-software-solutns/consultation'
+                        target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
                         text='Book a time'
                     />
                     <FeatureButton
-                        target='mailto:dw.software.solutns@gmail.com'
+                        target='mailto:dw.soft.solutions@gmail.com'
                         text='Shoot me an email'
                     />
                 </div>
