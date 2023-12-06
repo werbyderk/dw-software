@@ -5,6 +5,7 @@ import { Tooltip } from 'react-tooltip'
 import { motion, useSpring, useTransform } from 'framer-motion'
 import LightSwitch from '@/components/LightSwitch'
 import FeatureButton from '@/components/FeatureButton'
+import UnderConstruction from '@/components/UnderConstruction'
 
 export default function Home() {
     const [hoverMern, setHoverMern] = useState(false)
@@ -38,6 +39,7 @@ export default function Home() {
 
     return (
         <main className='p-2 w-full'>
+            <UnderConstruction />
             <div
                 style={{
                     fontFamily: 'var(--font-body)',
@@ -102,18 +104,18 @@ export default function Home() {
                 Whether you want to expand your online presence with an eye-catching website or optimize 
                 your daily work with software tailored to your needs, I'm here to help.`}</span>
             </div>
-            <div className='w-full'>
-                <div className='w-[50%] flex justify-between m-auto'>
-                    <FeatureButton
-                        target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
-                        text='Book a time'
-                    />
-                    <FeatureButton
-                        target='mailto:dw.soft.solutions@gmail.com'
-                        text='Shoot me an email'
-                    />
-                </div>
+
+            <div className='pb-8 w-[450px] flex justify-between m-auto'>
+                <FeatureButton
+                    target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
+                    text='Book a time'
+                />
+                <FeatureButton
+                    target='mailto:dw.soft.solutions@gmail.com'
+                    text='Shoot me an email'
+                />
             </div>
+
             <LightSwitch />
         </main>
     )
