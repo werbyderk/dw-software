@@ -7,10 +7,17 @@ import LightSwitch from '@/components/LightSwitch'
 import FeatureButton from '@/components/FeatureButton'
 import UnderConstruction from '@/components/UnderConstruction'
 
+const clientWindow = typeof window === 'undefined' ? { innerWidth: 0 } : window
+
 export default function Home() {
     const [hoverMern, setHoverMern] = useState(false)
     const [spinnerSpeed, setSpinnerSpeed] = useState<number | undefined>(10)
+    const [width, setWidth] = useState<number>(clientWindow.innerWidth)
     const mernSpring = useSpring(1)
+
+    const handleWindowSizeChange = () => {
+        setWidth(clientWindow.innerWidth)
+    }
 
     const updateSpinSpeed = () => {
         setTimeout(() => {
@@ -25,6 +32,10 @@ export default function Home() {
 
     useEffect(() => {
         updateSpinSpeed()
+        window.addEventListener('resize', handleWindowSizeChange)
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange)
+        }
     }, [])
 
     useEffect(() => {
@@ -36,10 +47,37 @@ export default function Home() {
     // useEffect(() => {
     //     console.debug(spinnerSpeed)
     // })
+    const isMobile = width <= 930
 
+    const renderHero = () => {
+        if (isMobile) {
+            return (
+                <div className='flex justify-center mb-24'>
+                    <div>
+                        <h2 className=''>DEREK</h2>
+                        <span className='flex leading-[1]'>
+                            <h2 className='font-[200]'>WERBOWY SOFT SOLUTIONS</h2>
+                        </span>
+                    </div>
+                </div>
+            )
+        }
+        return (
+            <div className='flex justify-center mb-24'>
+                <div>
+                    <h1 className=''>DEREK</h1>
+                    <span className='flex leading-[1]'>
+                        <h1 className='font-[200]'>WERBOWY</h1>
+                        <h1>&nbsp;</h1>
+                        <h1 className='leading-none'>SOFT SOLUTIONS</h1>
+                    </span>
+                </div>
+            </div>
+        )
+    }
     return (
-        <main className='p-2 w-full'>
-            <UnderConstruction />
+        <main className='p-2 w-full overflow-x-hidden'>
+            <UnderConstruction compact={isMobile} />
             <div
                 style={{
                     fontFamily: 'var(--font-body)',
@@ -51,18 +89,9 @@ export default function Home() {
                 }}
                 className='pl-8'
             >
-                <div className='flex justify-center mb-24'>
-                    <div>
-                        <h1 className='tracking-[31px] font-[700] leading-none'>DEREK</h1>
-                        <span className='flex leading-[0.7]'>
-                            <h1 className='font-[200]'>WERBOWY</h1>
-                            <h1>&nbsp;</h1>
-                            <h1 className='leading-none'>SOFT SOLUTIONS</h1>
-                        </span>
-                    </div>
-                </div>
+                {renderHero()}
                 <div className='z-10'>
-                    <FeatureCarousel customSpinTime={spinnerSpeed} />
+                    <FeatureCarousel customSpinTime={spinnerSpeed} compact={isMobile} />
                 </div>
             </div>
             <div style={{ fontSize: '1.5rem' }} className='p-12 text-center'>
@@ -80,12 +109,11 @@ export default function Home() {
                     )}
                 />
                 <span>{`Hi, I'm Derek. I help small businesses local to `}</span>
-                <a
-                    href='https://www.google.com/search?q=%23yeahthatgreenville'
-                    target='_blank'
-                    className='cursor-pointer duration-300 hover:text-green-600'
-                >
-                    #yeahthatgreenville{' '}
+                <a href='https://www.google.com/search?q=%23yeahthatgreenville' target='_blank'>
+                    {' '}
+                    <span className='cursor-pointer duration-300 hover:text-green-600'>
+                        #yeahthatgreenville{' '}
+                    </span>
                 </a>
                 <span>succeed on and offline with </span>
                 {/* <motion.div
@@ -105,18 +133,23 @@ export default function Home() {
                 your daily work with software tailored to your needs, I'm here to help.`}</span>
             </div>
 
-            <div className='pb-8 w-[450px] flex justify-between m-auto'>
+            <div
+                className={`pb-8 flex justify-between m-auto ${
+                    isMobile ? 'w-[300px]' : 'w-[450px]'
+                }`}
+            >
                 <FeatureButton
                     target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
                     text='Book a time'
+                    compact={isMobile}
                 />
                 <FeatureButton
                     target='mailto:dw.soft.solutions@gmail.com'
-                    text='Shoot me an email'
+                    text='Send me an email'
+                    compact={isMobile}
                 />
             </div>
-
-            <LightSwitch />
+            {!isMobile && <LightSwitch />}
         </main>
     )
 }

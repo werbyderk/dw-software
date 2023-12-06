@@ -48,7 +48,7 @@ const carouselStyles: any = (lineHeight: number, delay: number) => {
     }
 }
 
-const FeatureCarousel = (props: { customSpinTime?: number }) => {
+const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) => {
     const [transitionIn, setTransitionIn] = useState(true)
     const [featureItem, setFeatureItem] = useState(0)
     const [featureStyles, setFeatureStyles] = useState<any>()
@@ -67,7 +67,6 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
     const offStage = FEATURE_ITEMS[nextIdx + 1 < FEATURE_ITEMS.length ? nextIdx + 1 : 0]
 
     const animationDuration = props.customSpinTime ?? 2000
-    console.debug('🚀 ~ FeatureCarousel ~ animationDuration:', animationDuration)
 
     useEffect(() => {
         const lineHeightProperty = lineHeightRef.current
@@ -84,17 +83,13 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
             className='flex justify-center transition-opacity duration-300 h-36'
             style={{ opacity: visible ? 1 : 0 }}
         >
-            <h3>Quality</h3>
+            <h3 className={props.compact ? 'text-sm' : ''}>Quality</h3>
             <Transition
                 in={transitionIn}
                 timeout={animationDuration}
                 appear
                 onEntering={() => {
                     if (_currentFeatureWidth !== 0 && firstTransition) {
-                        console.debug(
-                            '🚀 ~ useEffect ~ _currentFeatureWidth:',
-                            _currentFeatureWidth
-                        )
                         setCarouselWidth(
                             [_currentFeatureWidth, _nextFeatureWidth].sort((a, b) => b - a)[0]
                         )
@@ -106,7 +101,6 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
                 }}
                 onExiting={() => {
                     if (_offStageWidth !== 0 || _nextFeatureWidth !== 0) {
-                        console.debug('🚀 ~ useEffect ~ _nextFeatureWidth:', _nextFeatureWidth)
                         const compare = props.customSpinTime
                             ? [_nextFeatureWidth, _currentFeatureWidth, _offStageWidth]
                             : [_offStageWidth, _nextFeatureWidth]
@@ -138,14 +132,18 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
                             className='ease-in overflow-visible'
                         >
                             <div style={styles?.ctr} className='whitespace-nowrap w-max'>
-                                <h3 ref={lineHeightRef as any} style={styles?.last}>
+                                <h3
+                                    ref={lineHeightRef as any}
+                                    style={styles?.last}
+                                    className={`w-min ${props.compact && 'text-sm'}`}
+                                >
                                     &nbsp;{last}
                                 </h3>
                                 <div>
                                     <h3
                                         ref={currentFeatureRef as any}
                                         style={styles?.current}
-                                        className='w-min'
+                                        className={`w-min ${props.compact && 'text-sm'}`}
                                     >
                                         &nbsp;{current}
                                     </h3>
@@ -154,7 +152,7 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
                                     <h3
                                         ref={nextFeatureRef as any}
                                         style={styles?.next}
-                                        className='w-min'
+                                        className={`w-min ${props.compact && 'text-sm'}`}
                                     >
                                         &nbsp;{next}
                                     </h3>
@@ -163,7 +161,7 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
                                     <h3
                                         ref={offStageRef as any}
                                         style={styles?.offStage}
-                                        className='w-min'
+                                        className={`w-min ${props.compact && 'text-sm'}`}
                                     >
                                         &nbsp;{offStage}
                                     </h3>
@@ -173,7 +171,7 @@ const FeatureCarousel = (props: { customSpinTime?: number }) => {
                     )
                 }}
             </Transition>
-            <h3>&nbsp;at competitive rates</h3>
+            <h3 className={`${props.compact && 'text-sm'}`}>&nbsp;at competitive rates</h3>
         </div>
     )
 }
