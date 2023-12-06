@@ -4,6 +4,7 @@ import FeatureCarousel from '@/components/FeatureCarousel'
 import { Tooltip } from 'react-tooltip'
 import { motion, useSpring, useTransform } from 'framer-motion'
 import LightSwitch from '@/components/LightSwitch'
+import FeatureButton from '@/components/FeatureButton'
 
 export default function Home() {
     const [hoverMern, setHoverMern] = useState(false)
@@ -54,7 +55,7 @@ export default function Home() {
                         <span className='flex leading-[0.7]'>
                             <h1 className='font-[200]'>WERBOWY</h1>
                             <h1>&nbsp;</h1>
-                            <h1>WEB SOLUTIONS</h1>
+                            <h1 className='leading-none'>SOFT SOLUTIONS</h1>
                         </span>
                     </div>
                 </div>
@@ -76,7 +77,15 @@ export default function Home() {
                         </p>
                     )}
                 />
-                <span>{`Hi, I'm Derek. I help small businesses succeed on and offline with `}</span>
+                <span>{`Hi, I'm Derek. I help small businesses local to `}</span>
+                <a
+                    href='https://www.google.com/search?q=%23yeahthatgreenville'
+                    target='_blank'
+                    className='cursor-pointer duration-300 hover:text-green-600'
+                >
+                    #yeahthatgreenville{' '}
+                </a>
+                <span>succeed on and offline with </span>
                 {/* <motion.div
                     // whileHover={{ scale: 1.2 }}
                     className='inline-block'
@@ -89,7 +98,21 @@ export default function Home() {
                         MERN
                     </span>
                 </motion.div> */}
-                <span>{` applications that fit their needs. Whether you want to expand your online presence with an eye-catching website or optimize your daily work with software tailored to your needs, I'm here to help.`}</span>
+                <span>{` applications that fit their needs. 
+                Whether you want to expand your online presence with an eye-catching website or optimize 
+                your daily work with software tailored to your needs, I'm here to help.`}</span>
+            </div>
+            <div className='w-full'>
+                <div className='w-[50%] flex justify-between m-auto'>
+                    <FeatureButton
+                        target='https://calendly.com/dw-software-solutns/consultation'
+                        text='Book a time'
+                    />
+                    <FeatureButton
+                        target='mailto:dw.software.solutns@gmail.com'
+                        text='Shoot me an email'
+                    />
+                </div>
             </div>
             <LightSwitch />
         </main>
