@@ -10,27 +10,23 @@ import UnderConstruction from '@/components/UnderConstruction'
 const clientWindow = typeof window === 'undefined' ? { innerWidth: 0 } : window
 
 export default function Home() {
-    const [hoverMern, setHoverMern] = useState(false)
     const [spinnerSpeed, setSpinnerSpeed] = useState<number | undefined>(10)
     const [width, setWidth] = useState<number>(clientWindow.innerWidth)
-    const mernSpring = useSpring(1)
 
     const handleWindowSizeChange = () => {
         setWidth(clientWindow.innerWidth)
     }
 
-    const updateSpinSpeed = () => {
-        setTimeout(() => {
-            console.debug(spinnerSpeed)
-            setSpinnerSpeed((prev) => {
-                if (!prev || prev > 1000) return
-                updateSpinSpeed()
-                return prev * 1.1
-            })
-        }, 70)
-    }
-
     useEffect(() => {
+        const updateSpinSpeed = () => {
+            setTimeout(() => {
+                setSpinnerSpeed((prev) => {
+                    if (!prev || prev > 1000) return
+                    updateSpinSpeed()
+                    return prev * 1.1
+                })
+            }, 70)
+        }
         updateSpinSpeed()
         window.addEventListener('resize', handleWindowSizeChange)
         return () => {
@@ -38,27 +34,15 @@ export default function Home() {
         }
     }, [])
 
-    useEffect(() => {
-        if (hoverMern) mernSpring.set(1.2)
-        else mernSpring.set(1)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [hoverMern])
-
-    // useEffect(() => {
-    //     console.debug(spinnerSpeed)
-    // })
-    const isMobile = width <= 930
+    const isMobile = width <= 1024
 
     const renderHero = () => {
         if (isMobile) {
             return (
                 <div className='flex justify-center mb-24'>
-                    <div>
-                        <h2 className=''>DEREK</h2>
-                        <span className='flex leading-[1]'>
-                            <h2 className='font-[200]'>WERBOWY SOFT SOLUTIONS</h2>
-                        </span>
-                    </div>
+                    <h2 className='font-[800]'>
+                        DEREK <br /> WERBOWY SOFT SOLUTIONS
+                    </h2>
                 </div>
             )
         }
@@ -66,18 +50,19 @@ export default function Home() {
             <div className='flex justify-center mb-24'>
                 <div>
                     <h1 className=''>DEREK</h1>
-                    <span className='flex leading-[1]'>
+                    <div className='flex leading-[1]'>
                         <h1 className='font-[200]'>WERBOWY</h1>
                         <h1>&nbsp;</h1>
                         <h1 className='leading-none'>SOFT SOLUTIONS</h1>
-                    </span>
+                    </div>
                 </div>
             </div>
         )
     }
     return (
         <main className='p-2 w-full overflow-x-hidden'>
-            <UnderConstruction compact={isMobile} />
+            <LightSwitch isMobile={isMobile} />
+            <UnderConstruction />
             <div
                 style={{
                     fontFamily: 'var(--font-body)',
@@ -94,62 +79,47 @@ export default function Home() {
                     <FeatureCarousel customSpinTime={spinnerSpeed} compact={isMobile} />
                 </div>
             </div>
-            <div style={{ fontSize: '1.5rem' }} className='p-12 text-center'>
-                <Tooltip
-                    id='mern'
-                    place='bottom'
-                    style={{ maxWidth: '40rem' }}
-                    content=''
-                    render={() => (
-                        <p className='text-center'>
-                            The MongoDB, Express.js, React.js, Node.js tech stack enables the
-                            development of flexible and modern applications for end users or
-                            internal organization use
-                        </p>
-                    )}
-                />
-                <span>{`Hi, I'm Derek. I help small businesses local to `}</span>
-                <a href='https://www.google.com/search?q=%23yeahthatgreenville' target='_blank'>
-                    {' '}
-                    <span className='cursor-pointer duration-300 hover:text-green-600'>
-                        #yeahthatgreenville{' '}
-                    </span>
-                </a>
-                <span>succeed on and offline with </span>
-                {/* <motion.div
-                    // whileHover={{ scale: 1.2 }}
-                    className='inline-block'
-                    // className='inline-block hover:scale-[1.15] transition-transform'
-                    style={{ scale: mernSpring }}
-                    onMouseEnter={() => setHoverMern(true)}
-                    onMouseLeave={() => setHoverMern(false)}
-                >
-                    <span data-tooltip-id='mern' className='font-bold cursor-default '>
-                        MERN
-                    </span>
-                </motion.div> */}
-                <span>{` applications that fit their needs. 
-                Whether you want to expand your online presence with an eye-catching website or optimize 
-                your daily work with software tailored to your needs, I'm here to help.`}</span>
-            </div>
+            <section className='p-12 text-center text-lg lg:text-2xl'>
+                <h2
+                    className='mb-8 text-center'
+                    style={{ fontFamily: 'var(--font-body)' }}
+                >{`Hi, I'm Derek.`}</h2>
+                <div>
+                    <span>{`I help small businesses local to `}</span>
+                    <a href='https://www.google.com/search?q=%23yeahthatgreenville' target='_blank'>
+                        {' '}
+                        <span className='cursor-pointer duration-300 hover:text-green-600'>
+                            #yeahthatgreenville
+                        </span>
+                    </a>
+                    <span>{` succeed on and offline with applications that fit their needs. 
+                    Whether you want to give your website a facelift or optimize 
+                    your daily work with software tailored to your needs, I'm here to help.`}</span>
+                </div>
+            </section>
 
-            <div
-                className={`pb-8 flex justify-between m-auto ${
-                    isMobile ? 'w-[300px]' : 'w-[450px]'
-                }`}
-            >
+            <div className={`pb-8 flex justify-between m-auto w-max gap-2 lg:w-[500px] h-24`}>
                 <FeatureButton
                     target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
-                    text='Book a time'
+                    text='Book a time ⏰'
                     compact={isMobile}
                 />
                 <FeatureButton
                     target='mailto:dw.soft.solutions@gmail.com'
-                    text='Send me an email'
+                    text='Send me an email 📬'
                     compact={isMobile}
                 />
             </div>
-            {!isMobile && <LightSwitch />}
+            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
+                <p className='text-lg'>The get-down:</p>
+                <ul className='list-disc'>
+                    <li>2 years professional, 8 years casual experience</li>
+                    <li>Graduated 4 month blockchain bootcamp</li>
+                    <li>1 year developing an enterprise resource platform</li>
+                    <li>0.3 year developing health care claim processing system</li>
+                    <li>0.3 year developing diabetic meal tracking app</li>
+                </ul>
+            </div>
         </main>
     )
 }

@@ -72,7 +72,6 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
         const lineHeightProperty = lineHeightRef.current
             ? window.getComputedStyle(lineHeightRef.current, null).getPropertyValue('line-height')
             : '0'
-        // console.debug('🚀 ~ useEffect ~ lineHeightProperty:', lineHeightProperty)
         const lineHeight = parseInt(lineHeightProperty.substring(0, lineHeightProperty.length - 2))
         setFeatureStyles(carouselStyles(lineHeight, animationDuration))
         setVisible(true)
@@ -80,10 +79,10 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
 
     return (
         <div
-            className='flex justify-center transition-opacity duration-300 h-36'
+            className='flex justify-center transition-opacity duration-300 h-12 md:h-16'
             style={{ opacity: visible ? 1 : 0 }}
         >
-            <h3 className={props.compact ? 'text-sm' : ''}>Quality</h3>
+            <h3 className='text-xs sm:text-lg md:text-xl lg:text-3xl'>Quality</h3>
             <Transition
                 in={transitionIn}
                 timeout={animationDuration}
@@ -135,7 +134,7 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                                 <h3
                                     ref={lineHeightRef as any}
                                     style={styles?.last}
-                                    className={`w-min ${props.compact && 'text-sm'}`}
+                                    className='w-min text-xs sm:text-lg md:text-xl lg:text-3xl'
                                 >
                                     &nbsp;{last}
                                 </h3>
@@ -143,7 +142,7 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                                     <h3
                                         ref={currentFeatureRef as any}
                                         style={styles?.current}
-                                        className={`w-min ${props.compact && 'text-sm'}`}
+                                        className='w-min text-xs sm:text-lg md:text-xl lg:text-3xl'
                                     >
                                         &nbsp;{current}
                                     </h3>
@@ -152,7 +151,7 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                                     <h3
                                         ref={nextFeatureRef as any}
                                         style={styles?.next}
-                                        className={`w-min ${props.compact && 'text-sm'}`}
+                                        className='w-min text-xs sm:text-lg md:text-xl lg:text-3xl'
                                     >
                                         &nbsp;{next}
                                     </h3>
@@ -161,7 +160,7 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                                     <h3
                                         ref={offStageRef as any}
                                         style={styles?.offStage}
-                                        className={`w-min ${props.compact && 'text-sm'}`}
+                                        className='w-min text-xs sm:text-lg md:text-xl lg:text-3xl'
                                     >
                                         &nbsp;{offStage}
                                     </h3>
@@ -171,7 +170,9 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                     )
                 }}
             </Transition>
-            <h3 className={`${props.compact && 'text-sm'}`}>&nbsp;at competitive rates</h3>
+            <h3 className='text-xs md:text-xl sm:text-lg lg:text-3xl'>
+                &nbsp;at competitive rates
+            </h3>
         </div>
     )
 }

@@ -8,27 +8,22 @@ var Engine = Matter.Engine,
     Bodies = Matter.Bodies,
     Composite = Matter.Composite
 
-const LightSwitch = () => {
+const LightSwitch = ({ isMobile }: { isMobile?: boolean }) => {
     const containerRef = useRef()
     useEffect(() => {
-        // create an engine
         var engine = Engine.create()
 
-        // create a renderer
         var render = Render.create({
             element: containerRef.current,
             engine: engine,
             options: {
                 background: 'transparent',
                 wireframes: false,
-                width: 400,
-                height: 600,
+                width: isMobile ? 200 : 400,
+                height: isMobile ? 350 : 600,
             },
         })
 
-        // create two boxes and a ground
-        // var boxA = Bodies.rectangle(400, 200, 80, 80)
-        // var boxB = Bodies.rectangle(450, 50, 80, 80)
         const chain: any[][] = []
         const numOfBeads = 16
 
@@ -59,7 +54,7 @@ const LightSwitch = () => {
             chainIndex++
             chain.push([nextBody, constraint])
         }
-        // const constraint = Constraint.create({ bodyA: boxA, pointB: { x: 20, y: 0 } })
+
         const topCanvasConstraint = Constraint.create({
             stiffness: 0.1,
             damping: 0.1,
@@ -70,7 +65,6 @@ const LightSwitch = () => {
 
         // add all of the bodies to the world
         const flatChain = flatten(chain).filter((el) => el !== undefined)
-        console.debug([topCanvasConstraint, ...flatChain])
         const mouse = Mouse.create(render.canvas)
         const mouseConstraint = MouseConstraint.create(engine, {
             mouse,
@@ -81,18 +75,14 @@ const LightSwitch = () => {
                     visible: false,
                 },
             },
-            // body: flatChain[flatChain.length - 2],
         })
         Composite.add(engine.world, [topCanvasConstraint, ...flatChain, mouseConstraint])
 
         render.mouse = mouse
-        // run the renderer
         Render.run(render)
 
-        // create runner
         var runner = Runner.create()
 
-        // run the engine
         Runner.run(runner, engine)
     }, [])
 
