@@ -111,13 +111,12 @@ export default function Home() {
                 />
             </div>
             <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
-                <p className='text-lg'>The get-down:</p>
+                <p className='text-lg md:text-xl lg:text-3xl'>Experience / the get-down:</p>
                 <ul className='list-disc'>
-                    <li>2 years professional, 8 years casual experience</li>
-                    <li>Graduated 4 month blockchain bootcamp</li>
-                    <li>1 year developing an enterprise resource platform</li>
-                    <li>0.3 year developing health care claim processing system</li>
-                    <li>0.3 year developing diabetic meal tracking app</li>
+                    <li>Blockchain, decentralized apps</li>
+                    <li>Enterprise resource platform development</li>
+                    <li>Health care claim processing system</li>
+                    <li>Diabetic meal tracking app</li>
                 </ul>
             </div>
         </main>
