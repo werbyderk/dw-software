@@ -88,7 +88,7 @@ export default function Home() {
                     <span>{`I help small businesses local to `}</span>
                     <a href='https://www.google.com/search?q=%23yeahthatgreenville' target='_blank'>
                         {' '}
-                        <span className='cursor-pointer duration-300 hover:text-green-600'>
+                        <span className='cursor-pointer duration-300 hover:text-green-600 text-green-600 md:text-black'>
                             #yeahthatgreenville
                         </span>
                     </a>
@@ -111,11 +111,11 @@ export default function Home() {
                 />
             </div>
             <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
-                <p className='text-lg md:text-xl lg:text-3xl'>Experience / the get-down:</p>
+                <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
                 <ul className='list-disc'>
                     <li>Blockchain, decentralized apps</li>
                     <li>Enterprise resource platform development</li>
-                    <li>Health care claim processing system</li>
+                    <li>Health care claim processing development</li>
                     <li>Diabetic meal tracking app</li>
                 </ul>
             </div>

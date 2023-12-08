@@ -19,7 +19,7 @@ const LightSwitch = ({ isMobile }: { isMobile?: boolean }) => {
             options: {
                 background: 'transparent',
                 wireframes: false,
-                width: isMobile ? 200 : 400,
+                width: isMobile ? 50 : 150,
                 height: isMobile ? 350 : 600,
             },
         })
@@ -65,20 +65,20 @@ const LightSwitch = ({ isMobile }: { isMobile?: boolean }) => {
 
         // add all of the bodies to the world
         const flatChain = flatten(chain).filter((el) => el !== undefined)
-        const mouse = Mouse.create(render.canvas)
-        const mouseConstraint = MouseConstraint.create(engine, {
-            mouse,
-            constraint: {
-                stiffness: 0.03,
-                damping: 0.2,
-                render: {
-                    visible: false,
-                },
-            },
-        })
-        Composite.add(engine.world, [topCanvasConstraint, ...flatChain, mouseConstraint])
+        // const mouse = Mouse.create(render.canvas)
+        // const mouseConstraint = MouseConstraint.create(engine, {
+        //     mouse,
+        //     constraint: {
+        //         stiffness: 0.03,
+        //         damping: 0.2,
+        //         render: {
+        //             visible: false,
+        //         },
+        //     },
+        // })
+        Composite.add(engine.world, [topCanvasConstraint, ...flatChain /*mouseConstraint*/])
 
-        render.mouse = mouse
+        // render.mouse = mouse
         Render.run(render)
 
         var runner = Runner.create()
