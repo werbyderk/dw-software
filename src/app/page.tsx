@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import FeatureCarousel from '@/components/FeatureCarousel'
 import { Tooltip } from 'react-tooltip'
 import { motion, useSpring, useTransform } from 'framer-motion'
@@ -12,6 +12,10 @@ const clientWindow = typeof window === 'undefined' ? { innerWidth: 0 } : window
 export default function Home() {
     const [spinnerSpeed, setSpinnerSpeed] = useState<number | undefined>(10)
     const [width, setWidth] = useState<number>(clientWindow.innerWidth)
+
+    const handleLightSwitchPull = () => {
+        console.debug('boing x2')
+    }
 
     const handleWindowSizeChange = () => {
         setWidth(clientWindow.innerWidth)
@@ -61,8 +65,8 @@ export default function Home() {
     }
     return (
         <main className='p-2 w-full overflow-x-hidden'>
-            <LightSwitch isMobile={isMobile} />
-            <UnderConstruction />
+            <LightSwitch onPull={handleLightSwitchPull} />
+            {/* <UnderConstruction /> */}
             <div
                 style={{
                     fontFamily: 'var(--font-body)',
@@ -102,12 +106,10 @@ export default function Home() {
                 <FeatureButton
                     target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
                     text='Book a time ⏰'
-                    compact={isMobile}
                 />
                 <FeatureButton
                     target='mailto:dw.soft.solutions@gmail.com'
                     text='Send me an email 📬'
-                    compact={isMobile}
                 />
             </div>
             <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
