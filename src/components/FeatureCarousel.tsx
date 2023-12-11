@@ -2,12 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Transition } from 'react-transition-group'
 import { useMeasure } from 'react-use'
 
-const FEATURE_ITEMS = [
-    'websites',
-    'mobile apps',
-    'business-to-customer software',
-    'internal software solutions',
-]
+const FEATURE_ITEMS = ['custom software', 'websites', 'mobile apps', 'desktop apps']
 
 const carouselStyles: any = (lineHeight: number, delay: number) => {
     const ctr = {} //{ transition: 'width 500ms' }
