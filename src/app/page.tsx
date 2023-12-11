@@ -110,7 +110,7 @@ export default function Home() {
                     compact={isMobile}
                 />
             </div>
-            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl mb-4'>
+            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl pb-12'>
                 <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
                 <ul className='list-disc'>
                     <li>Blockchain, decentralized apps</li>
@@ -119,10 +119,10 @@ export default function Home() {
                     <li>Diabetic meal tracking app</li>
                 </ul>
             </div>
-            <div className='h-20'>
+            <div className='h-24 m-auto w-fit'>
                 <FeatureButton
                     target='https://www.linkedin.com/in/derek-werbowy-946161249/'
-                    text='Connect with me on LinkedIn 👥'
+                    text='View my LinkedIn 👥'
                     compact={isMobile}
                 />
             </div>
