@@ -119,7 +119,7 @@ export default function Home() {
                     <li>Diabetic meal tracking app</li>
                 </ul>
             </div>
-            <div className='h-24'>
+            <div className='h-24 m-auto w-fit'>
                 <FeatureButton
                     target='https://www.linkedin.com/in/derek-werbowy-946161249/'
                     text='View my LinkedIn 👥'
