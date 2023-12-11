@@ -122,7 +122,7 @@ export default function Home() {
             <div className='h-24'>
                 <FeatureButton
                     target='https://www.linkedin.com/in/derek-werbowy-946161249/'
-                    text='Connect with me on LinkedIn 👥'
+                    text='View my LinkedIn 👥'
                     compact={isMobile}
                 />
             </div>
