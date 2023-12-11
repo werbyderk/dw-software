@@ -19,7 +19,7 @@ const LightSwitch = ({ isMobile }: { isMobile?: boolean }) => {
             options: {
                 background: 'transparent',
                 wireframes: false,
-                width: isMobile ? 50 : 150,
+                width: isMobile ? 100 : 150,
                 height: isMobile ? 350 : 600,
             },
         })
