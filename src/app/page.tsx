@@ -6,15 +6,20 @@ import { motion, useSpring, useTransform } from 'framer-motion'
 import LightSwitch from '@/components/LightSwitch'
 import FeatureButton from '@/components/FeatureButton'
 import UnderConstruction from '@/components/UnderConstruction'
+import Dropdown from '@/components/Dropdown'
+import { ArrowUpward } from '@mui/icons-material'
 
 const clientWindow = typeof window === 'undefined' ? { innerWidth: 0 } : window
 
 export default function Home() {
     const [spinnerSpeed, setSpinnerSpeed] = useState<number | undefined>(10)
     const [width, setWidth] = useState<number>(clientWindow.innerWidth)
+    const [dropdownActive, setDropdownActive] = useState(false)
+    const [pullMeVisible, setPullMeVisible] = useState(true)
+    const mainRef = useRef()
 
     const handleLightSwitchPull = () => {
-        console.debug('boing x2')
+        setDropdownActive((prev) => !prev)
     }
 
     const handleWindowSizeChange = () => {
@@ -44,9 +49,9 @@ export default function Home() {
         if (isMobile) {
             return (
                 <div className='flex justify-center mb-24'>
-                    <h2 className='font-[800]'>
+                    <h3 className='font-[800]'>
                         DEREK <br /> WERBOWY SOFT SOLUTIONS
-                    </h2>
+                    </h3>
                 </div>
             )
         }
@@ -63,10 +68,24 @@ export default function Home() {
             </div>
         )
     }
+
     return (
-        <main className='p-2 w-full overflow-x-hidden'>
-            <LightSwitch onPull={handleLightSwitchPull} />
-            {/* <UnderConstruction /> */}
+        <main ref={mainRef as any} className='p-2 w-screen'>
+            <LightSwitch
+                onPull={handleLightSwitchPull}
+                onCanvasClick={() => setPullMeVisible(false)}
+            />
+            <div
+                className='absolute top-28 left-2 text-slate-500 duration-300'
+                style={{ opacity: pullMeVisible ? 1 : 0 }}
+            >
+                <div className='m-auto'>
+                    <ArrowUpward />
+                </div>
+                <p>Pull me!</p>
+            </div>
+            <Dropdown isDropped={dropdownActive} isMobile={isMobile} />
+            <UnderConstruction />
             <div
                 style={{
                     fontFamily: 'var(--font-body)',
@@ -78,7 +97,7 @@ export default function Home() {
                 }}
                 className='pl-8'
             >
-                {renderHero()}
+                <section className='pl-8'>{renderHero()}</section>
                 <div className='z-10'>
                     <FeatureCarousel customSpinTime={spinnerSpeed} compact={isMobile} />
                 </div>
@@ -97,29 +116,41 @@ export default function Home() {
                         </span>
                     </a>
                     <span>{` succeed on and offline with applications that fit their needs. 
-                    Whether you want to give your website a facelift or optimize 
-                    your daily work with software tailored to your needs, I'm here to help.`}</span>
+                      Whether you want to give your website a facelift or optimize 
+                      your daily work with software tailored to your needs, I'm here to help.`}</span>
                 </div>
             </section>
 
-            <div className={`pb-8 flex justify-between m-auto w-max gap-2 lg:w-[500px] h-24`}>
+            <div
+                className={`md:pb-8 flex justify-between m-auto w-96 max-w-[100%] gap-2 lg:w-[500px] h-24`}
+            >
                 <FeatureButton
                     target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
                     text='Book a time ⏰'
+                    compact={isMobile}
                 />
                 <FeatureButton
                     target='mailto:dw.soft.solutions@gmail.com'
                     text='Send me an email 📬'
+                    compact={isMobile}
                 />
             </div>
-            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
+
+            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl pb-12'>
                 <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
                 <ul className='list-disc'>
                     <li>Blockchain, decentralized apps</li>
                     <li>Enterprise resource platform development</li>
-                    <li>Health care claim processing development</li>
+                    <li>Health care claim processing</li>
                     <li>Diabetic meal tracking app</li>
                 </ul>
+            </div>
+            <div className='h-24 m-auto w-fit'>
+                <FeatureButton
+                    target='https://www.linkedin.com/in/derek-werbowy-946161249/'
+                    text='View my LinkedIn 👥'
+                    compact={isMobile}
+                />
             </div>
         </main>
     )

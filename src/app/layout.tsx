@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang='en'>
             <body
-                className={`${hero.variable} ${body.variable} min-w-screen min-h-screen bg-green-50`}
+                className={`${hero.variable} ${body.variable} min-w-screen min-h-screen bg-green-50 `}
             >
                 {children}
             </body>

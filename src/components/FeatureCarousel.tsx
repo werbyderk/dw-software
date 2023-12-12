@@ -2,13 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import { Transition } from 'react-transition-group'
 import { useMeasure } from 'react-use'
 
-const FEATURE_ITEMS = [
-    'websites',
-    'mobile apps',
-    'business-to-customer solutions',
-    'internal software',
-]
-
 const EASTER_EGG_ITEMS = [
     'oh hi',
     "you've been here for a while!",
@@ -31,6 +24,7 @@ const EASTER_EGG_ITEMS = [
     '',
     '👹',
 ]
+const FEATURE_ITEMS = ['custom software', 'websites', 'mobile apps', 'desktop apps']
 
 const carouselStyles: any = (lineHeight: number, delay: number) => {
     const ctr = {} //{ transition: 'width 500ms' }
@@ -93,13 +87,19 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
 
     const animationDuration = props.customSpinTime ?? 2000
 
-    useEffect(() => {
+    const setLineHeight = () => {
         const lineHeightProperty = lineHeightRef.current
             ? window.getComputedStyle(lineHeightRef.current, null).getPropertyValue('line-height')
             : '0'
         const lineHeight = parseInt(lineHeightProperty.substring(0, lineHeightProperty.length - 2))
         setFeatureStyles(carouselStyles(lineHeight, animationDuration))
         setVisible(true)
+    }
+
+    useEffect(() => {
+        setLineHeight()
+        window.addEventListener('resize', setLineHeight)
+        return () => window.removeEventListener('resize', setLineHeight)
     }, [animationDuration])
 
     return (
@@ -140,7 +140,6 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                 }}
             >
                 {(state) => {
-                    // console.debug(state)
                     const styles = featureStyles && featureStyles[state]
                     return (
                         <div
@@ -148,9 +147,6 @@ const FeatureCarousel = (props: { customSpinTime?: number; compact?: boolean }) 
                                 transition: 'width 2s',
                                 transitionTimingFunction: 'ease-in-out',
                                 width: carouselWidth !== 0 ? carouselWidth : 'auto',
-                                // position: 'relative',
-                                // WebkitBackgroundClip: 'text',
-                                // backgroundColor: 'grey',
                                 WebkitTextFillColor: 'black',
                             }}
                             className='ease-in overflow-visible'

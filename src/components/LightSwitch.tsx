@@ -10,7 +10,12 @@ const Engine = Matter.Engine,
     Composite = Matter.Composite,
     Events = Matter.Events
 
-const LightSwitch = ({ onPull }: { onPull: () => void }) => {
+interface LightSwitchProps {
+    onPull: () => void
+    onCanvasClick: () => void
+}
+
+const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
     let isMouseDown = false
     const containerRef = useRef()
     const wrapperRef = useRef(null)
@@ -24,15 +29,16 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
             options: {
                 background: 'transparent',
                 wireframes: false,
-                height: 420,
+                height: 380,
+                width: 100,
             },
         })
 
-        window.addEventListener('resize', () => {
-            render.bounds.max.x = window.innerWidth
-            render.options.width = window.innerWidth
-            render.canvas.width = window.innerWidth
-        })
+        // window.addEventListener('resize', () => {
+        //     render.bounds.max.x = window.innerWidth
+        //     render.options.width = window.innerWidth
+        //     render.canvas.width = window.innerWidth
+        // })
 
         const chain: any[][] = []
         const numOfBeads = 16
@@ -42,8 +48,8 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
         let handle: Matter.Body
         for (let i = -7; i <= numOfBeads; i++) {
             const lastBody = isFirstBody ? undefined : chain[chainIndex - 1][0]
-            const x = 20 + i * -6
-            const y = 17 * (i + 1 - 10)
+            const x = 19 //+ i * -2
+            const y = 17 * (i + 1 - 15)
             const isHandle = i === numOfBeads
             const nextBody = isHandle
                 ? Bodies.rectangle(x, y + 20, 15, 50, {
@@ -58,7 +64,7 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
                 ? undefined
                 : Constraint.create({
                       stiffness: 1.5,
-                      damping: 0.2,
+                      damping: 0.5,
                       render: { lineWidth: 0, anchors: false },
                       bodyA: lastBody,
                       bodyB: nextBody,
@@ -120,14 +126,13 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
         const handleMouseMove = () => {
             if (!isMouseDown) return
             const y = handle.position.y
-            if (y >= 225 && hitDownTrigger.current === false) {
+            if (y >= 120 && hitDownTrigger.current === false) {
                 hitDownTrigger.current = true
             }
         }
 
         const handleMouseEnd = () => {
             if (hitDownTrigger.current) {
-                console.debug('boing')
                 onPull()
                 hitDownTrigger.current = false
             }
@@ -138,6 +143,7 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
             (e) => {
                 isMouseDown = true
                 mouseConstraint.mouse.mousedown(e)
+                onCanvasClick()
             },
             { passive: true }
         )
@@ -162,9 +168,9 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
             isMouseDown = false
             handleMouseEnd()
         })
-
         Events.on(mouseConstraint, 'mousedown', () => {
             isMouseDown = true
+            onCanvasClick()
         })
         Events.on(mouseConstraint, 'mousemove', (e) => {
             isMouseDown && handleMouseMove()
@@ -174,8 +180,8 @@ const LightSwitch = ({ onPull }: { onPull: () => void }) => {
     }, [])
     // console.debug(containerRef)
     return (
-        <div ref={wrapperRef} onScroll={() => console.debug('scroll')}>
-            <div ref={containerRef as any} className='absolute top-0 left-0 z-10' />
+        <div ref={wrapperRef}>
+            <div ref={containerRef as any} className='absolute top-0 left-0 z-50' />
         </div>
     )
 }
