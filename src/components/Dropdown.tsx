@@ -85,7 +85,7 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
             >
                 <div className='w-screen absolute' style={{ bottom: dropdownPosition }}>
                     <div
-                        className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8 pt-32 overflow-auto'
+                        className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8 pt-32 overflow-auto flex content-center'
                         style={{
                             borderBottomLeftRadius: '16px',
                             borderBottomRightRadius: '16px',
