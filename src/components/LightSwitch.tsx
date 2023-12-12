@@ -29,16 +29,15 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
             options: {
                 background: 'transparent',
                 wireframes: false,
-                height: 380,
-                width: 100,
+                height: 300,
             },
         })
 
-        // window.addEventListener('resize', () => {
-        //     render.bounds.max.x = window.innerWidth
-        //     render.options.width = window.innerWidth
-        //     render.canvas.width = window.innerWidth
-        // })
+        window.addEventListener('resize', () => {
+            render.bounds.max.x = window.innerWidth
+            render.options.width = window.innerWidth
+            render.canvas.width = window.innerWidth
+        })
 
         const chain: any[][] = []
         const numOfBeads = 16
@@ -63,7 +62,7 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
             const constraint = isFirstBody
                 ? undefined
                 : Constraint.create({
-                      stiffness: 1.5,
+                      stiffness: 1,
                       damping: 0.5,
                       render: { lineWidth: 0, anchors: false },
                       bodyA: lastBody,
@@ -90,7 +89,7 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
             mouse,
             constraint: {
                 stiffness: 0.025,
-                damping: 0.2,
+                damping: 0.4,
                 render: {
                     visible: false,
                 },
@@ -106,22 +105,25 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
 
         mouseConstraint.mouse.element.removeEventListener(
             'mousewheel',
-            mouseConstraint.mouse.mousewheel
+            (mouseConstraint.mouse as any).mousewheel
         )
         mouseConstraint.mouse.element.removeEventListener(
             'DOMMouseScroll',
-            mouseConstraint.mouse.mousewheel
+            (mouseConstraint.mouse as any).mousewheel
         )
 
         mouseConstraint.mouse.element.removeEventListener(
             'touchstart',
-            mouseConstraint.mouse.mousedown
+            (mouseConstraint.mouse as any).mousedown
         )
         mouseConstraint.mouse.element.removeEventListener(
             'touchmove',
-            mouseConstraint.mouse.mousemove
+            (mouseConstraint.mouse as any).mousemove
         )
-        mouseConstraint.mouse.element.removeEventListener('touchend', mouseConstraint.mouse.mouseup)
+        mouseConstraint.mouse.element.removeEventListener(
+            'touchend',
+            (mouseConstraint.mouse as any).mouseup
+        )
 
         const handleMouseMove = () => {
             if (!isMouseDown) return
@@ -142,29 +144,27 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
             'touchstart',
             (e) => {
                 isMouseDown = true
-                mouseConstraint.mouse.mousedown(e)
+                ;(mouseConstraint.mouse as any).mousedown(e)
                 onCanvasClick()
             },
             { passive: true }
         )
         mouseConstraint.mouse.element.addEventListener('touchmove', (e) => {
             if (mouseConstraint.body) {
-                mouseConstraint.mouse.mousemove(e)
+                ;(mouseConstraint.mouse as any).mousemove(e)
                 isMouseDown && handleMouseMove()
             }
         })
 
         mouseConstraint.mouse.element.addEventListener('touchend', (e) => {
             if (mouseConstraint.body) {
-                mouseConstraint.mouse.mouseup(e)
+                ;(mouseConstraint.mouse as any).mouseup(e)
             }
             isMouseDown = false
         })
 
         Events.on(mouseConstraint, 'mouseup', function (event) {
-            var mousePosition = event.mouse.position
-            console.debug(handle!.position)
-            console.log('mouseup at ' + mousePosition.x + ' ' + mousePosition.y)
+            var mousePosition = (event as any).mouse.position
             isMouseDown = false
             handleMouseEnd()
         })
@@ -178,7 +178,7 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
 
         Runner.run(runner, engine)
     }, [])
-    // console.debug(containerRef)
+
     return (
         <div ref={wrapperRef}>
             <div ref={containerRef as any} className='absolute top-0 left-0 z-50' />

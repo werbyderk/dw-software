@@ -84,7 +84,7 @@ export default function Home() {
                 </div>
                 <p>Pull me!</p>
             </div>
-            <Dropdown isDropped={dropdownActive} isMobile={isMobile} />
+            <Dropdown isDropped={dropdownActive} />
             <UnderConstruction />
             <div
                 style={{

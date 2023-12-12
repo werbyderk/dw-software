@@ -1,17 +1,22 @@
 'use client'
 import { createPortal } from 'react-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useMeasure } from 'react-use'
 
 interface DropdownProps {
     isDropped: boolean
-    isMobile: boolean
 }
 
-const Dropdown = ({ isDropped, isMobile }: DropdownProps) => {
+const Dropdown = ({ isDropped }: DropdownProps) => {
     const [portalRef, { height: screenHeight }] = useMeasure()
-    const [dropdownPosition, setDropdownPosition] = useState(screenHeight)
+    const topOfScreen = screenHeight + 64
+    const [dropdownPosition, setDropdownPosition] = useState(topOfScreen)
     const [dropdownVelocity, setDropdownVelocity] = useState(0)
+    const docRef = useRef<any>()
+
+    useEffect(() => {
+        docRef.current = document
+    })
 
     useEffect(() => {
         if (isDropped) {
@@ -22,8 +27,8 @@ const Dropdown = ({ isDropped, isMobile }: DropdownProps) => {
     }, [isDropped])
 
     useEffect(() => {
-        setDropdownPosition(screenHeight)
-    }, [screenHeight])
+        setDropdownPosition(isDropped ? 0 : topOfScreen)
+    }, [topOfScreen])
 
     useEffect(() => {
         if (dropdownPosition !== 0 && isDropped) {
@@ -56,53 +61,56 @@ const Dropdown = ({ isDropped, isMobile }: DropdownProps) => {
                     }),
                 10
             )
-        } else if (dropdownPosition < screenHeight && !isDropped) {
+        } else if (dropdownPosition < topOfScreen && !isDropped) {
+            // Pulling up
             setTimeout(() => {
                 setDropdownPosition((prev) => prev + 10 * 1.5)
             }, 10)
         }
     }, [dropdownPosition, isDropped])
 
-    const backgroundOpacity = ((screenHeight - dropdownPosition) / screenHeight) * 0.6
+    const backgroundOpacity = ((topOfScreen - dropdownPosition) / topOfScreen) * 0.6
 
-    return createPortal(
-        <div
-            ref={portalRef as any}
-            className={`w-screen h-screen fixed z-40 top-0 overflow-hidden`}
-            style={{
-                backgroundColor: `rgba(148, 163, 184, ${backgroundOpacity})`,
-            }}
-        >
-            <div className='w-screen h-screen absolute' style={{ bottom: dropdownPosition }}>
-                <div
-                    className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8'
-                    style={{
-                        borderBottomLeftRadius: '8px',
-                        borderBottomRightRadius: '8px',
-                    }}
-                >
-                    <div className='m-auto'>
-                        <h2 className='text-center mb-4'>
-                            The get-down <br /> ⬇️
-                        </h2>
-                        <iframe
-                            className='m-auto'
-                            width='560'
-                            height='395'
-                            src='https://www.youtube.com/embed/b_Au4VtxYP8?si=E_jcqOrKf5cDZZHZ'
-                            title='YouTube video player'
-                            frameBorder='0'
-                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                            allowFullScreen
-                            {...(isMobile
-                                ? { width: 300, height: 210 }
-                                : { width: 560, height: 395 })}
-                        ></iframe>
+    return (
+        docRef.current &&
+        createPortal(
+            <div
+                ref={portalRef as any}
+                className={`w-screen h-screen fixed pt-16 ${
+                    dropdownPosition >= screenHeight ? '-z-10' : 'z-40'
+                } top-0 overflow-hidden`}
+                style={{
+                    backgroundColor: `rgba(148, 163, 184, ${backgroundOpacity})`,
+                }}
+            >
+                <div className='w-screen absolute' style={{ bottom: dropdownPosition }}>
+                    <div
+                        className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8 pt-32 overflow-auto'
+                        style={{
+                            borderBottomLeftRadius: '16px',
+                            borderBottomRightRadius: '16px',
+                            height: `calc(100vh + 64px)`,
+                        }}
+                    >
+                        <div className='m-auto'>
+                            <h2 className='text-center mb-4'>
+                                The get-down <br /> ⬇️
+                            </h2>
+                            <iframe
+                                className='m-auto w-[200px] h-[140px] sm:w-[400px] sm:h-[280px] md:w-[560px] md:h-[395px] rounded-lg'
+                                src='https://www.youtube.com/embed/a1zjPVg7gvI?si=87abSwCu0a2m29BQ'
+                                title='YouTube video player'
+                                frameBorder='0'
+                                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                                allowFullScreen
+                            ></iframe>
+                            <h4 className='w-full text-center pt-4'>More coming soon...</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>,
-        document.body
+            </div>,
+            docRef.current.body
+        )
     )
 }
 
