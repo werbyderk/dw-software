@@ -1,17 +1,26 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import FeatureCarousel from '@/components/FeatureCarousel'
 import { Tooltip } from 'react-tooltip'
 import { motion, useSpring, useTransform } from 'framer-motion'
 import LightSwitch from '@/components/LightSwitch'
 import FeatureButton from '@/components/FeatureButton'
 import UnderConstruction from '@/components/UnderConstruction'
+import Dropdown from '@/components/Dropdown'
+import { ArrowUpward } from '@mui/icons-material'
 
 const clientWindow = typeof window === 'undefined' ? { innerWidth: 0 } : window
 
 export default function Home() {
     const [spinnerSpeed, setSpinnerSpeed] = useState<number | undefined>(10)
     const [width, setWidth] = useState<number>(clientWindow.innerWidth)
+    const [dropdownActive, setDropdownActive] = useState(false)
+    const [pullMeVisible, setPullMeVisible] = useState(true)
+    const mainRef = useRef()
+
+    const handleLightSwitchPull = () => {
+        setDropdownActive((prev) => !prev)
+    }
 
     const handleWindowSizeChange = () => {
         setWidth(clientWindow.innerWidth)
@@ -40,9 +49,9 @@ export default function Home() {
         if (isMobile) {
             return (
                 <div className='flex justify-center mb-24'>
-                    <h2 className='font-[800]'>
+                    <h3 className='font-[800]'>
                         DEREK <br /> WERBOWY SOFT SOLUTIONS
-                    </h2>
+                    </h3>
                 </div>
             )
         }
@@ -59,9 +68,23 @@ export default function Home() {
             </div>
         )
     }
+
     return (
-        <main className='p-2 w-full overflow-x-hidden'>
-            <LightSwitch isMobile={isMobile} />
+        <main ref={mainRef as any} className='p-2 w-screen'>
+            <LightSwitch
+                onPull={handleLightSwitchPull}
+                onCanvasClick={() => setPullMeVisible(false)}
+            />
+            <div
+                className='absolute top-28 left-2 text-slate-500 duration-300'
+                style={{ opacity: pullMeVisible ? 1 : 0 }}
+            >
+                <div className='m-auto'>
+                    <ArrowUpward />
+                </div>
+                <p>Pull me!</p>
+            </div>
+            <Dropdown isDropped={dropdownActive} />
             <UnderConstruction />
             <div
                 style={{
@@ -74,7 +97,7 @@ export default function Home() {
                 }}
                 className='pl-8'
             >
-                {renderHero()}
+                <section className='pl-8'>{renderHero()}</section>
                 <div className='z-10'>
                     <FeatureCarousel customSpinTime={spinnerSpeed} compact={isMobile} />
                 </div>
@@ -93,12 +116,14 @@ export default function Home() {
                         </span>
                     </a>
                     <span>{` succeed on and offline with applications that fit their needs. 
-                    Whether you want to give your website a facelift or optimize 
-                    your daily work with software tailored to your needs, I'm here to help.`}</span>
+                      Whether you want to give your website a facelift or optimize 
+                      your daily work with software tailored to your needs, I'm here to help.`}</span>
                 </div>
             </section>
 
-            <div className={`pb-8 flex justify-between m-auto w-max gap-2 lg:w-[500px] h-24`}>
+            <div
+                className={`md:pb-8 flex justify-between m-auto w-96 max-w-[100%] gap-2 lg:w-[500px] h-24`}
+            >
                 <FeatureButton
                     target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
                     text='Book a time ⏰'
@@ -110,6 +135,7 @@ export default function Home() {
                     compact={isMobile}
                 />
             </div>
+
             <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl pb-12'>
                 <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
                 <ul className='list-disc'>
