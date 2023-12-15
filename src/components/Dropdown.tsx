@@ -85,7 +85,7 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
             >
                 <div className='w-screen absolute' style={{ bottom: dropdownPosition }}>
                     <div
-                        className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8 pt-32 overflow-auto flex content-center'
+                        className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8 overflow-auto flex content-center'
                         style={{
                             borderBottomLeftRadius: '16px',
                             borderBottomRightRadius: '16px',
@@ -93,9 +93,9 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
                         }}
                     >
                         <div className='m-auto'>
-                            <h2 className='text-center mb-4'>
+                            <h4 className='text-xl md:text-4xl text-center mb-4'>
                                 The get-down <br /> ⬇️
-                            </h2>
+                            </h4>
                             <iframe
                                 className='m-auto w-[200px] h-[140px] sm:w-[400px] sm:h-[280px] md:w-[560px] md:h-[395px] rounded-lg'
                                 src='https://www.youtube.com/embed/a1zjPVg7gvI?si=87abSwCu0a2m29BQ'
@@ -104,7 +104,7 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
                                 allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                                 allowFullScreen
                             ></iframe>
-                            <h4 className='w-full text-center pt-4'>More coming soon...</h4>
+                            <h4 className='w-full text-center pt-4 text-sm'>More coming soon...</h4>
                         </div>
                     </div>
                 </div>

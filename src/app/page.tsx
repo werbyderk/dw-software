@@ -85,7 +85,7 @@ export default function Home() {
                 <p>Pull me!</p>
             </div>
             <Dropdown isDropped={dropdownActive} />
-            <UnderConstruction />
+            {/* <UnderConstruction /> */}
             <div
                 style={{
                     fontFamily: 'var(--font-body)',
