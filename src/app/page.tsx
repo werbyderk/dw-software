@@ -49,8 +49,8 @@ export default function Home() {
         if (isMobile) {
             return (
                 <div className='flex justify-center mb-24'>
-                    <h3 className='font-[800]'>
-                        DEREK <br /> WERBOWY SOFT SOLUTIONS
+                    <h3 className='font-[800] uppercase'>
+                        Derek <br /> Werbowy Soft Solutions
                     </h3>
                 </div>
             )
@@ -58,11 +58,11 @@ export default function Home() {
         return (
             <div className='flex justify-center mb-24'>
                 <div>
-                    <h1 className=''>DEREK</h1>
+                    <h1 className='uppercase'>Derek</h1>
                     <div className='flex leading-[1]'>
-                        <h1 className='font-[200]'>WERBOWY</h1>
+                        <h1 className='font-[200] uppercase'>Werbowy</h1>
                         <h1>&nbsp;</h1>
-                        <h1 className='leading-none'>SOFT SOLUTIONS</h1>
+                        <h1 className='leading-none uppercase'>Soft Solutions</h1>
                     </div>
                 </div>
             </div>
