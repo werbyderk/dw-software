@@ -10,9 +10,7 @@ const body = DM_Sans({ subsets: ['latin'], variable: '--font-body', weight: '300
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang='en'>
-            <head>
-                <title>Derek Werbowy Soft Solutions</title>
-            </head>
+            <title>Derek Werbowy Soft Solutions</title>
             <Script async src='https://www.googletagmanager.com/gtag/js?id=G-F1HHMY889Z'></Script>
             <Script id='google analytics'>
                 {`            
