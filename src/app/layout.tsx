@@ -8,7 +8,7 @@ const hero = DM_Sans({ subsets: ['latin'], variable: '--font-hero' })
 const body = DM_Sans({ subsets: ['latin'], variable: '--font-body', weight: '300' })
 
 export const metadata: Metadata = {
-    title: 'Derek Werbow Soft Solutions',
+    title: 'Derek Werbowy Soft Solutions',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
