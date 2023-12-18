@@ -124,11 +124,7 @@ export default function Home() {
             <div
                 className={`md:pb-8 flex justify-between m-auto w-96 max-w-[100%] gap-2 lg:w-[500px] h-24`}
             >
-                <FeatureButton
-                    target='https://calendly.com/derek-werbowy-soft-solutions/consultation'
-                    text='Book a time ⏰'
-                    compact={isMobile}
-                />
+                <FeatureButton target='/consultation' text='Book a time ⏰' compact={isMobile} />
                 <FeatureButton
                     target='mailto:dw.soft.solutions@gmail.com'
                     text='Send me an email 📬'

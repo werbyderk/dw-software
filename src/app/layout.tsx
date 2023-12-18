@@ -11,13 +11,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang='en'>
             <title>Derek Werbowy Soft Solutions</title>
-            <Script async src='https://www.googletagmanager.com/gtag/js?id=G-F1HHMY889Z'></Script>
+            <Script async src='https://www.googletagmanager.com/gtag/js?id=G-3F1XY3JHCP'></Script>
             <Script id='google analytics'>
                 {`            
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-F1HHMY889Z');`}
+                gtag('config', 'G-3F1XY3JHCP');`}
             </Script>
             <body
                 className={`${hero.variable} ${body.variable} min-w-screen min-h-screen bg-green-50 `}
