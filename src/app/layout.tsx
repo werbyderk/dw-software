@@ -7,10 +7,13 @@ import Script from 'next/script'
 const hero = DM_Sans({ subsets: ['latin'], variable: '--font-hero' })
 const body = DM_Sans({ subsets: ['latin'], variable: '--font-body', weight: '300' })
 
+export const metadata: Metadata = {
+    title: 'Derek Werbow Soft Solutions',
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang='en'>
-            <title>Derek Werbowy Soft Solutions</title>
             <Script async src='https://www.googletagmanager.com/gtag/js?id=G-3F1XY3JHCP'></Script>
             <Script id='google analytics'>
                 {`            
