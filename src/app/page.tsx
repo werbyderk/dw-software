@@ -113,8 +113,8 @@ export default function Home() {
                             #yeahthatgreenville
                         </span>
                     </a>
-                    <span>{` succeed on and offline with JavaScript and Flutter applications that fit their needs. 
-                      Whether you want to give your website a facelift or optimize your daily work with software tailored to your needs, I'm here to deliver tailored web and mobile apps with a bang 💥`}</span>
+                    <span>{` succeed on and offline with web and mobile applications that fit their needs. 
+                      Whether you want to give your website a facelift or optimize your daily work with software tailored to your needs, I'm here to deliver with a bang 💥`}</span>
                 </div>
             </section>
 

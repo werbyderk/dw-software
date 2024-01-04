@@ -26,8 +26,8 @@ const EASTER_EGG_ITEMS = [
 ]
 const FEATURE_ITEMS = [
     'mobile applications',
-    'responsive websites',
     'search engine optimization',
+    'web applications',
     'B2C software',
 ]
 
