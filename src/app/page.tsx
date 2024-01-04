@@ -1,11 +1,9 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
 import FeatureCarousel from '@/components/FeatureCarousel'
-import { Tooltip } from 'react-tooltip'
-import { motion, useSpring, useTransform } from 'framer-motion'
 import LightSwitch from '@/components/LightSwitch'
 import FeatureButton from '@/components/FeatureButton'
-import UnderConstruction from '@/components/UnderConstruction'
+// import UnderConstruction from '@/components/UnderConstruction'
 import Dropdown from '@/components/Dropdown'
 import { ArrowUpward } from '@mui/icons-material'
 
@@ -97,14 +95,14 @@ export default function Home() {
                 }}
                 className='pl-8'
             >
-                <section className='pl-8'>{renderHero()}</section>
+                <section className='pl-10'>{renderHero()}</section>
                 <div className='z-10'>
                     <FeatureCarousel customSpinTime={spinnerSpeed} compact={isMobile} />
                 </div>
             </div>
             <section className='p-12 text-center text-lg lg:text-2xl'>
                 <h2
-                    className='mb-8 text-center'
+                    className='mb-8 text-center font-bold '
                     style={{ fontFamily: 'var(--font-body)' }}
                 >{`Hi, I'm Derek.`}</h2>
                 <div>
@@ -115,14 +113,13 @@ export default function Home() {
                             #yeahthatgreenville
                         </span>
                     </a>
-                    <span>{` succeed on and offline with applications that fit their needs. 
-                      Whether you want to give your website a facelift or optimize 
-                      your daily work with software tailored to your needs, I'm here to help.`}</span>
+                    <span>{` succeed on and offline with JavaScript and Flutter applications that fit their needs. 
+                      Whether you want to give your website a facelift or optimize your daily work with software tailored to your needs, I'm here to deliver tailored web and mobile apps with a bang 💥`}</span>
                 </div>
             </section>
 
             <div
-                className={`md:pb-8 flex justify-between m-auto w-96 max-w-[100%] gap-2 lg:w-[500px] h-24`}
+                className={`md:pb-8 flex justify-between m-auto w-96 max-w-[85%] h-36 gap-2 lg:w-[500px]`}
             >
                 <FeatureButton target='/consultation' text='Book a time ⏰' compact={isMobile} />
                 <FeatureButton
@@ -132,7 +129,7 @@ export default function Home() {
                 />
             </div>
 
-            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl pb-12'>
+            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
                 <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
                 <ul className='list-disc'>
                     <li>Blockchain, decentralized apps</li>
@@ -141,7 +138,7 @@ export default function Home() {
                     <li>Diabetic meal tracking app</li>
                 </ul>
             </div>
-            <div className='h-24 m-auto w-fit'>
+            <div className='h-36 m-auto w-fit flex align-middle'>
                 <FeatureButton
                     target='https://www.linkedin.com/in/derek-werbowy-946161249/'
                     text='View my LinkedIn 👥'

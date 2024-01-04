@@ -1,3 +1,4 @@
+import Background from '@/components/Background'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Cairo, DM_Sans, Fira_Sans, Inter, Poppins, Work_Sans } from 'next/font/google'
@@ -23,8 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 gtag('config', 'G-3F1XY3JHCP');`}
             </Script>
             <body
-                className={`${hero.variable} ${body.variable} min-w-screen min-h-screen bg-green-50 `}
+                id='body'
+                className={`${hero.variable} ${body.variable} min-w-screen min-h-screen bg-green-50 -z-20 overflow-x-clip`}
             >
+                <Background />
                 {children}
             </body>
         </html>

@@ -24,7 +24,12 @@ const EASTER_EGG_ITEMS = [
     '',
     '👹',
 ]
-const FEATURE_ITEMS = ['custom software', 'websites', 'mobile apps', 'desktop apps']
+const FEATURE_ITEMS = [
+    'mobile applications',
+    'responsive websites',
+    'search engine optimization',
+    'B2C software',
+]
 
 const carouselStyles: any = (lineHeight: number, delay: number) => {
     const ctr = {} //{ transition: 'width 500ms' }

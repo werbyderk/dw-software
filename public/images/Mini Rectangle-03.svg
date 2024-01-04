@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_8_copy" data-name="Layer 8 copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.18 398.41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffff68;
+      }
+
+      .cls-2 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Basic_Shapes_copy" data-name="Basic Shapes copy">
+    <g>
+      <polygon points="239.93 78.59 239.93 40.89 31.85 40.89 31.85 346.12 69.54 346.12 69.54 357.52 251.33 357.52 251.33 78.59 239.93 78.59"/>
+      <rect x="58.15" y="67.19" width="155.48" height="252.63"/>
+      <g>
+        <path class="cls-2" d="m238.17,344.37H82.7V91.74h155.48v252.63Z"/>
+        <path class="cls-1" d="m213.63,319.82H58.15V67.19h155.48v252.63Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

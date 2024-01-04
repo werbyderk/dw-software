@@ -5,11 +5,11 @@ interface FeatureButtonProps {
 }
 
 const FeatureButton = ({ compact, target, text }: FeatureButtonProps) => (
-    <div>
+    <div className='items-center flex'>
         <a href={target} target='_blank'>
             <div
                 className={`cursor-pointer rounded  bg-[#1CDBB6] w-fit m-auto p-4 hover:bg-green-500 duration-300 ${
-                    compact ? 'text-base hover:text-lg' : 'text-2xl hover:text-3xl'
+                    compact ? 'text-sm' : 'text-2xl hover:text-3xl'
                 }`}
             >
                 {' '}
