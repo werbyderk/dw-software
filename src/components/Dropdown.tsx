@@ -2,21 +2,17 @@
 import { createPortal } from 'react-dom'
 import { useEffect, useState, useRef } from 'react'
 import { useMeasure } from 'react-use'
+import PortfolioCard from './PortfolioCard'
+import DropdownBackground from './DropdownBackground'
 
 interface DropdownProps {
     isDropped: boolean
 }
 
 const Dropdown = ({ isDropped }: DropdownProps) => {
-    const [portalRef, { height: screenHeight }] = useMeasure()
-    const topOfScreen = screenHeight + 64
+    const [topOfScreen, setTopOfScreen] = useState<number>(Number.MAX_VALUE)
     const [dropdownPosition, setDropdownPosition] = useState(topOfScreen)
     const [dropdownVelocity, setDropdownVelocity] = useState(0)
-    const docRef = useRef<any>()
-
-    useEffect(() => {
-        docRef.current = document
-    })
 
     useEffect(() => {
         if (isDropped) {
@@ -29,6 +25,13 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
     useEffect(() => {
         setDropdownPosition(isDropped ? 0 : topOfScreen)
     }, [topOfScreen])
+
+    useEffect(() => {
+        const updateTopOfScreen = () => setTopOfScreen(window.innerHeight + 64)
+        updateTopOfScreen()
+        window.addEventListener('resize', updateTopOfScreen)
+        return () => window.removeEventListener('resize', updateTopOfScreen)
+    }, [])
 
     useEffect(() => {
         if (dropdownPosition !== 0 && isDropped) {
@@ -72,45 +75,32 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
     const backgroundOpacity = ((topOfScreen - dropdownPosition) / topOfScreen) * 0.6
 
     return (
-        docRef.current &&
-        createPortal(
-            <div
-                ref={portalRef as any}
-                className={`w-screen h-screen fixed pt-16 ${
-                    dropdownPosition >= screenHeight ? '-z-10' : 'z-40'
-                } top-0 overflow-hidden`}
-                style={{
-                    backgroundColor: `rgba(148, 163, 184, ${backgroundOpacity})`,
-                }}
-            >
-                <div className='w-screen absolute' style={{ bottom: dropdownPosition }}>
-                    <div
-                        className='w-[80%] h-[100%] bg-slate-50 relative m-auto p-8 overflow-auto flex content-center'
-                        style={{
-                            borderBottomLeftRadius: '16px',
-                            borderBottomRightRadius: '16px',
-                            height: `calc(100vh + 64px)`,
-                        }}
-                    >
-                        <div className='m-auto'>
-                            <h4 className='text-xl md:text-4xl text-center mb-4'>
-                                The get-down <br /> ⬇️
-                            </h4>
-                            <iframe
-                                className='m-auto w-[200px] h-[140px] sm:w-[400px] sm:h-[280px] md:w-[560px] md:h-[395px] rounded-lg'
-                                src='https://www.youtube.com/embed/a1zjPVg7gvI?si=87abSwCu0a2m29BQ'
-                                title='YouTube video player'
-                                frameBorder='0'
-                                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                                allowFullScreen
-                            ></iframe>
-                            <h4 className='w-full text-center pt-4 text-sm'>More coming soon...</h4>
-                        </div>
-                    </div>
+        <div
+            suppressHydrationWarning
+            className='w-[80%] h-[100%] bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 overflow-auto flex flex-col z-50 gap-8 content-center'
+            style={{
+                borderBottomLeftRadius: '16px',
+                borderBottomRightRadius: '16px',
+                height: `calc(100vh + 64px)`,
+                bottom: dropdownPosition,
+            }}
+        >
+            <DropdownBackground
+                opacity={backgroundOpacity}
+                isDropped={dropdownPosition >= topOfScreen - 64}
+            />
+            <div className='mt-16 ml-32 mr-32'>
+                <h4 className='text-center text-xl md:text-4xl mb-4'>Portfolio</h4>
+                <hr className='mb-4' />
+                <div className='flex justify-center'>
+                    <PortfolioCard
+                        imgSrc='/images/Greenville-Bike-Taxi.png'
+                        title='Greenville Bike Taxi'
+                        description='Pedicab service for downtown Greenville, SC'
+                    />
                 </div>
-            </div>,
-            docRef.current.body
-        )
+            </div>
+        </div>
     )
 }
 

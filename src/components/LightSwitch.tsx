@@ -47,7 +47,7 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
         let handle: Matter.Body
         for (let i = -7; i <= numOfBeads; i++) {
             const lastBody = isFirstBody ? undefined : chain[chainIndex - 1][0]
-            const x = 19 //+ i * -2
+            const x = 19
             const y = 17 * (i + 1 - 15)
             const isHandle = i === numOfBeads
             const nextBody = isHandle

@@ -10,6 +10,7 @@ const config: Config = {
         fontFamily: {
             hero: 'DM Sans',
             body: 'DM Sans',
+            lemon: 'Lemon',
         },
     },
     plugins: [],

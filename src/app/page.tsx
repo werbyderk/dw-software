@@ -14,6 +14,7 @@ export default function Home() {
     const [width, setWidth] = useState<number>(clientWindow.innerWidth)
     const [dropdownActive, setDropdownActive] = useState(false)
     const [pullMeVisible, setPullMeVisible] = useState(true)
+    const [isClient, setIsClient] = useState(false)
     const mainRef = useRef()
 
     const handleLightSwitchPull = () => {
@@ -25,6 +26,7 @@ export default function Home() {
     }
 
     useEffect(() => {
+        setIsClient(true)
         const updateSpinSpeed = () => {
             setTimeout(() => {
                 setSpinnerSpeed((prev) => {
@@ -44,9 +46,9 @@ export default function Home() {
     const isMobile = width <= 1024
 
     const renderHero = () => {
-        if (isMobile) {
+        if (isMobile && isClient) {
             return (
-                <div className='flex justify-center mb-24'>
+                <div className='flex justify-center mb-24' suppressHydrationWarning>
                     <h3 className='font-[800] uppercase'>
                         Derek <br /> Werbowy Soft Solutions
                     </h3>
@@ -54,7 +56,7 @@ export default function Home() {
             )
         }
         return (
-            <div className='flex justify-center mb-24'>
+            <div className='flex justify-center mb-24' suppressHydrationWarning>
                 <div>
                     <h1 className='uppercase'>Derek</h1>
                     <div className='flex leading-[1]'>
@@ -95,7 +97,9 @@ export default function Home() {
                 }}
                 className='pl-8'
             >
-                <section className='pl-10'>{renderHero()}</section>
+                <section className='pl-10' suppressHydrationWarning>
+                    {renderHero()}
+                </section>
                 <div className='z-10'>
                     <FeatureCarousel customSpinTime={spinnerSpeed} compact={isMobile} />
                 </div>
@@ -129,14 +133,25 @@ export default function Home() {
                 />
             </div>
 
-            <div className='justify-self-center text-center text-sm md:text-lg lg:text-2xl'>
-                <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
-                <ul className='list-disc'>
-                    <li>Blockchain, decentralized apps</li>
-                    <li>Enterprise resource platform development</li>
-                    <li>Health care claim processing</li>
-                    <li>Diabetic meal tracking app</li>
-                </ul>
+            <div className='justify-center text-center text-sm md:text-lg lg:text-2xl grid md:grid-cols-2 gap-8 md:gap-0 w-full lg:pl-32 lg:pr-32'>
+                <iframe
+                    className='m-auto w-[200px] h-[140px] sm:w-[285px] sm:h-[200px] rounded-lg'
+                    src='https://www.youtube.com/embed/a1zjPVg7gvI?si=87abSwCu0a2m29BQ'
+                    title='YouTube video player'
+                    frameBorder='0'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                    allowFullScreen
+                ></iframe>
+                <div>
+                    <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
+                    <br />
+                    <ul className='list-disc'>
+                        <li>Blockchain, decentralized apps</li>
+                        <li>Enterprise resource platform development</li>
+                        <li>Health care claim processing</li>
+                        <li>Diabetic meal tracking app</li>
+                    </ul>
+                </div>
             </div>
             <div className='h-36 m-auto w-fit flex align-middle'>
                 <FeatureButton
