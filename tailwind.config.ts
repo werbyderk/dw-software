@@ -8,9 +8,9 @@ const config: Config = {
     ],
     theme: {
         fontFamily: {
-            hero: 'DM Sans',
-            body: 'DM Sans',
-            lemon: 'Lemon',
+            hero: ['var(--font-hero'],
+            body: ['var(--font-body)'],
+            lemon: ['var(--font-lemon)'],
         },
     },
     plugins: [],
