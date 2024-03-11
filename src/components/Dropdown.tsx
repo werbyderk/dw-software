@@ -76,8 +76,7 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
 
     return (
         <div
-            suppressHydrationWarning
-            className='w-[80%] h-[100%] bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 overflow-auto flex flex-col z-50 gap-8 content-center'
+            className='w-[80%] h-screen bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 pt-32 md:pt-8 overflow-auto flex flex-col z-50 gap-8 content-center'
             style={{
                 borderBottomLeftRadius: '16px',
                 borderBottomRightRadius: '16px',
@@ -89,7 +88,7 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
                 opacity={backgroundOpacity}
                 isDropped={dropdownPosition >= topOfScreen - 64}
             />
-            <div className='mt-16 ml-32 mr-32'>
+            <div className='mt-16 ml-8 mr-8 md:ml-32 md:mr-32'>
                 <h4 className='text-center text-xl md:text-4xl mb-4'>Portfolio</h4>
                 <hr className='mb-4' />
                 <div className='flex justify-center'>

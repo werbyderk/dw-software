@@ -30,6 +30,7 @@ const LightSwitch = ({ onPull, onCanvasClick }: LightSwitchProps) => {
                 background: 'transparent',
                 wireframes: false,
                 height: 300,
+                width: window.innerWidth / 2,
             },
         })
 
