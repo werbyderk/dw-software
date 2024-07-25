@@ -84,9 +84,16 @@ const Dropdown = ({ isDropped, onClose }: DropdownProps) => {
                 bottom: dropdownPosition,
             }}
         >
-            <button className='translate-y-16' onClick={onClose}>
-                <Image src='/icons/close.svg' width={20} height={20} alt='' />
-            </button>
+            <div className='translate-y-16'>
+                <Image
+                    src='/icons/close.svg'
+                    width={20}
+                    height={20}
+                    alt=''
+                    onClick={onClose}
+                    className='cursor-pointer'
+                />
+            </div>
             <DropdownBackground
                 opacity={backgroundOpacity}
                 isDropped={dropdownPosition >= topOfScreen - 64}
