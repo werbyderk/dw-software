@@ -1,15 +1,15 @@
 'use client'
-import { createPortal } from 'react-dom'
-import { useEffect, useState, useRef } from 'react'
-import { useMeasure } from 'react-use'
+import { useEffect, useState } from 'react'
 import PortfolioCard from './PortfolioCard'
 import DropdownBackground from './DropdownBackground'
+import Image from 'next/image'
 
 interface DropdownProps {
     isDropped: boolean
+    onClose: () => void
 }
 
-const Dropdown = ({ isDropped }: DropdownProps) => {
+const Dropdown = ({ isDropped, onClose }: DropdownProps) => {
     const [topOfScreen, setTopOfScreen] = useState<number>(Number.MAX_VALUE)
     const [dropdownPosition, setDropdownPosition] = useState(topOfScreen)
     const [dropdownVelocity, setDropdownVelocity] = useState(0)
@@ -76,7 +76,7 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
 
     return (
         <div
-            className='w-[80%] h-screen bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 pt-32 md:pt-8 overflow-auto flex flex-col z-50 gap-8 content-center'
+            className='w-[80%] h-screen bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 overflow-auto flex flex-col z-50 gap-8 content-center'
             style={{
                 borderBottomLeftRadius: '16px',
                 borderBottomRightRadius: '16px',
@@ -84,11 +84,14 @@ const Dropdown = ({ isDropped }: DropdownProps) => {
                 bottom: dropdownPosition,
             }}
         >
+            <button className='translate-y-16' onClick={onClose}>
+                <Image src='/icons/close.svg' width={20} height={20} alt='' />
+            </button>
             <DropdownBackground
                 opacity={backgroundOpacity}
                 isDropped={dropdownPosition >= topOfScreen - 64}
             />
-            <div className='mt-16 ml-8 mr-8 md:ml-32 md:mr-32'>
+            <div className='mx-1 md:mx-16'>
                 <h4 className='text-center text-xl md:text-4xl mb-4'>Portfolio</h4>
                 <hr className='mb-4' />
                 <div className='flex justify-center'>

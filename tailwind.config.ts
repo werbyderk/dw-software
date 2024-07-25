@@ -11,6 +11,7 @@ const config: Config = {
             hero: ['var(--font-hero'],
             body: ['var(--font-body)'],
             lemon: ['var(--font-lemon)'],
+            quote: ['var(--font-quote)'],
         },
     },
     plugins: [],

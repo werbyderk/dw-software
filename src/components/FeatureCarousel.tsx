@@ -26,9 +26,11 @@ const EASTER_EGG_ITEMS = [
 ]
 const FEATURE_ITEMS = [
     'mobile applications',
-    'search engine optimization',
+    'blockchain projects',
     'web applications',
-    'B2C software',
+    'software automation',
+    'mobile-friendly websites',
+    'user interface design',
 ]
 
 const carouselStyles: any = (lineHeight: number, delay: number) => {

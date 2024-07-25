@@ -2,10 +2,11 @@
 import { useEffect, useState, useRef } from 'react'
 import FeatureCarousel from '@/components/FeatureCarousel'
 import LightSwitch from '@/components/LightSwitch'
-import FeatureButton from '@/components/FeatureButton'
+import FeatureLink from '@/components/FeatureLink'
 // import UnderConstruction from '@/components/UnderConstruction'
 import Dropdown from '@/components/Dropdown'
 import { ArrowUpward } from '@mui/icons-material'
+import FeatureButton from '@/components/FeatureButton'
 
 const clientWindow = typeof window === 'undefined' ? { innerWidth: 0 } : window
 
@@ -84,7 +85,7 @@ export default function Home() {
                 </div>
                 <p>Pull me!</p>
             </div>
-            <Dropdown isDropped={dropdownActive} />
+            <Dropdown isDropped={dropdownActive} onClose={() => setDropdownActive(false)} />
             {/* <UnderConstruction /> */}
             <div
                 style={{
@@ -125,8 +126,8 @@ export default function Home() {
             <div
                 className={`md:pb-8 flex justify-between m-auto w-96 max-w-[85%] h-36 gap-2 lg:w-[500px]`}
             >
-                <FeatureButton target='/consultation' text='Book a time ⏰' compact={isMobile} />
-                <FeatureButton
+                <FeatureLink target='/consultation' text='Book a time ⏰' compact={isMobile} />
+                <FeatureLink
                     target='mailto:dw.soft.solutions@gmail.com'
                     text='Send me an email 📬'
                     compact={isMobile}
@@ -143,20 +144,26 @@ export default function Home() {
                     allowFullScreen
                 ></iframe>
                 <div>
-                    <p className='text-lg md:text-xl lg:text-3xl'>Experience:</p>
+                    <p className='text-lg md:text-xl lg:text-3xl'>Happy to help with:</p>
                     <br />
                     <ul className='list-disc'>
+                        <li>Web and mobile app development & design</li>
                         <li>Blockchain, decentralized apps</li>
                         <li>Enterprise resource platform development</li>
-                        <li>Health care claim processing</li>
-                        <li>Diabetic meal tracking app</li>
                     </ul>
                 </div>
             </div>
-            <div className='h-36 m-auto w-fit flex align-middle'>
-                <FeatureButton
+            <div
+                className={`md:pb-8 flex justify-between m-auto w-96 max-w-[85%] h-36 gap-2 lg:w-[500px]`}
+            >
+                <FeatureLink
                     target='https://www.linkedin.com/in/derek-werbowy-946161249/'
                     text='View my LinkedIn 👥'
+                    compact={isMobile}
+                />
+                <FeatureButton
+                    text='Portfolio 📄'
+                    onClick={() => setDropdownActive(true)}
                     compact={isMobile}
                 />
             </div>
