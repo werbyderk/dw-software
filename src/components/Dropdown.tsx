@@ -76,7 +76,7 @@ const Dropdown = ({ isDropped, onClose }: DropdownProps) => {
 
     return (
         <div
-            className='w-[80%] h-screen bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 overflow-auto flex flex-col z-50 gap-8 content-center'
+            className={`w-[80%] h-screen max-h-screen bg-slate-50 fixed left-[50%] translate-x-[-50%] p-8 overflow-auto flex flex-col z-50 gap-8 content-center`}
             style={{
                 borderBottomLeftRadius: '16px',
                 borderBottomRightRadius: '16px',
@@ -101,11 +101,31 @@ const Dropdown = ({ isDropped, onClose }: DropdownProps) => {
             <div className='mx-1 md:mx-16'>
                 <h4 className='text-center text-xl md:text-4xl mb-4'>Portfolio</h4>
                 <hr className='mb-4' />
-                <div className='flex justify-center'>
+                <div className='flex flex-col justify-center gap-8'>
                     <PortfolioCard
                         imgSrc='/images/Greenville-Bike-Taxi.png'
-                        title='Greenville Bike Taxi'
+                        title={
+                            <h3 className='font-lemon text-green-700 text-xl'>
+                                Greenville Bike Taxi
+                            </h3>
+                        }
                         description='Pedicab service for downtown Greenville, SC'
+                        testimonial='Derek was instrumental in the successful development of our website. He
+                            took what was essentially a PowerPoint presentation and turned it into
+                            an attractive, user-friendly, desktop and mobile friendly, website. He
+                            has a great talent for understanding our needs and putting them into
+                            action. Highly recommend!'
+                        testimonialAuthor='- Phil Gonzalez, 2024'
+                        href='https://www.greenvillebiketaxi.com'
+                    />
+                    <PortfolioCard
+                        imgSrc='/images/TMS-Center-Of-Greenville.png'
+                        title={
+                            <h3 className='font-gill text-[#72538b] font-bold text-2xl'>
+                                TMS Center of Greenville
+                            </h3>
+                        }
+                        description='Non-invasive service to treat depression and other mental health conditions'
                     />
                 </div>
             </div>

@@ -119,7 +119,7 @@ export default function Home() {
                         </span>
                     </a>
                     <span>{` succeed on and offline with web and mobile applications that fit their needs. 
-                      Whether you want to give your website a facelift or optimize your daily work with software tailored to your needs, I'm here to deliver with a bang 💥`}</span>
+                      Whether you want to give your website a facelift or are looking for a custom web or mobile app tailored to your needs, I'm here to deliver with a bang 💥`}</span>
                 </div>
             </section>
 
@@ -137,7 +137,7 @@ export default function Home() {
             <div className='justify-center text-center text-sm md:text-lg lg:text-2xl grid md:grid-cols-2 gap-8 md:gap-0 w-full lg:pl-32 lg:pr-32'>
                 <iframe
                     className='m-auto w-[200px] h-[140px] sm:w-[285px] sm:h-[200px] rounded-lg'
-                    src='https://www.youtube.com/embed/a1zjPVg7gvI?si=87abSwCu0a2m29BQ'
+                    src='https://www.youtube.com/embed/eBBhmHI_LWs?si=-Ml8DVlvdYWX8cRL'
                     title='YouTube video player'
                     frameBorder='0'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'

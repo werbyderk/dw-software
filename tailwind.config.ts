@@ -12,6 +12,7 @@ const config: Config = {
             body: ['var(--font-body)'],
             lemon: ['var(--font-lemon)'],
             quote: ['var(--font-quote)'],
+            gill: ['var(--font-gill-sans)'],
         },
     },
     plugins: [],
